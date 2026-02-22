@@ -1,93 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NeonCase Sim</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="bg-glow glow-1"></div>
-  <div class="bg-glow glow-2"></div>
-  <div id="seasonFx" class="season-fx"></div>
-
-  <header class="topbar glass">
-    <div class="logo">Neon<span>Case</span></div>
-    <nav id="tabs" class="tabs">
-      <button data-tab="dashboard" class="active">Dashboard</button><button data-tab="clicker">Click</button><button data-tab="cases">Cases</button><button data-tab="casino">Casino</button>
-      <button data-tab="battles">Battles</button><button data-tab="market">Market</button><button data-tab="inventory">Inventory</button><button data-tab="database">Database</button><button data-tab="stats">Stats</button>
-      <button id="adminTabBtn" data-tab="admin" class="hidden">Admin</button>
-    </nav>
-    <div class="auth-actions"><button id="themeToggle">🌓</button><button id="openAuth">Sign In</button></div>
-  </header>
-
-  <section class="currency-row">
-    <div class="currency-card glass"><small>Balance</small><strong id="money"></strong></div>
-    <div class="currency-card glass"><small>Bank</small><strong id="bankMoney"></strong></div>
-    <div class="currency-card glass"><small>XP/Level</small><strong id="xpLevel"></strong></div>
-    <div class="currency-card glass"><small>Rank</small><strong id="rank"></strong></div>
-    <div class="currency-card glass"><small>Loyalty</small><strong id="loyalty"></strong></div>
-  </section>
-
-  <main>
-    <section id="dashboard" class="tab-panel active">
-      <div class="grid two">
-        <article class="panel glass">
-          <h2>Season Event</h2><p id="seasonEvent"></p>
-          <div class="row-wrap"><button id="claimDaily">Claim Daily Reward</button><button id="dailyWheel">Spin Daily Wheel</button><button id="rebirthBtn">Rebirth</button></div>
-        </article>
-        <article class="panel glass"><h2>Live Feed</h2><div id="liveFeed" class="feed"></div></article>
-      </div>
-      <div class="grid two">
-        <article class="panel glass"><h2>Update Log</h2><div id="updateLog" class="history"></div></article>
-        <article class="panel glass"><h2>Credits</h2><p>made by d3vi0us and Mr. GPT</p></article>
-      </div>
-      <div class="panel glass"><h2>History</h2><div id="history" class="history"></div></div>
-      <div class="panel glass"><h2>Data Backup</h2><div class="row-wrap"><button id="exportData">Export Save</button><label class="import-label">Import Save<input id="importData" type="file" accept="application/json" hidden/></label></div></div>
-    </section>
-
-    <section id="clicker" class="tab-panel">
-      <div class="grid two">
-        <article class="panel glass center">
-          <h2>Click for Cash</h2><button id="moneyClick" class="coin-btn" aria-label="coin"></button><p>Per click: <span id="perClick"></span></p>
-          <div class="row-wrap"><button data-upg="click" class="upgrade" id="upgClick"></button><button data-upg="auto" class="upgrade" id="upgAuto"></button><button data-upg="luck" class="upgrade" id="upgLuck"></button></div>
-        </article>
-        <article class="panel glass"><h2>Loyalty</h2><p>Streak: <span id="streak"></span></p><p>Points: <span id="loyaltyPoints"></span></p><div class="row-wrap"><button id="claimStreak">Claim Streak Bonus</button><button id="redeemLoyalty">Redeem 100 points</button></div></article>
-      </div>
-    </section>
-
-    <section id="cases" class="tab-panel">
-      <article class="panel glass"><div class="row-between"><h2>Cases Shop</h2><input type="number" id="openCount" min="1" max="10" value="1" /></div><div id="caseList" class="card-grid"></div></article>
-      <article class="panel glass"><h2>Case Opening</h2><div id="caseAnimation" class="roll"></div><div id="openResults" class="card-grid big-cards"></div></article>
-    </section>
-
-    <section id="casino" class="tab-panel">
-      <article class="panel glass">
-        <h2>Casino</h2>
-        <div class="row-wrap"><select id="gameSelect"><option>Blackjack</option><option>Roulette</option><option>Coinflip</option><option>Crash</option><option>Jackpot</option><option>Mines</option><option>Slots</option><option>Plinko</option></select><input id="betAmount" type="number" min="1" value="50"/><button id="playGame">Play</button></div>
-        <div id="casinoUI" class="casino-ui"></div>
-        <p id="casinoOutput"></p>
-      </article>
-    </section>
-
-    <section id="battles" class="tab-panel">
-      <article class="panel glass"><h2>Case Battles</h2><div class="row-wrap"><select id="battleMode"><option>1v1</option><option>Team</option><option>FFA</option></select><select id="battleCase"></select><button id="startBattle">Start Battle</button></div><div id="battleAnimation" class="roll"></div><p id="battleOutput"></p></article>
-    </section>
-
-    <section id="market" class="tab-panel">
-      <article class="panel glass"><h2>Marketplace + Auction</h2><canvas id="marketGraph" width="900" height="220"></canvas><div class="row-wrap"><input id="bidAmount" type="number" min="1" value="50" /><button id="confirmMarket">Confirm Action</button></div><div id="marketListings" class="card-grid"></div><div id="marketLog" class="feed"></div></article>
-    </section>
-
-    <section id="inventory" class="tab-panel">
-      <article class="panel glass"><h2>Inventory</h2><div class="row-wrap"><select id="rarityFilter"><option value="all">All</option><option>Mil-Spec</option><option>Restricted</option><option>Classified</option><option>Covert</option><option>Knife</option></select><input id="searchSkin" placeholder="Search"/><button id="sortValue">Sort by Value</button></div><div id="inventoryGrid" class="card-grid big-cards"></div></article>
-    </section>
-
-    <section id="database" class="tab-panel"><article class="panel glass"><h2>Skins Database</h2><div id="databaseGrid" class="card-grid"></div></article></section>
-    <section id="stats" class="tab-panel"><article class="panel glass"><h2>Stats</h2><ul id="statsList"></ul></article></section>
-    <section id="admin" class="tab-panel hidden"><article class="panel glass"><h2>Admin Panel</h2><div class="row-wrap"><button id="spawnItem">Spawn Item</button><button id="boostEconomy">Economy +10%</button><button id="grantCash">Grant $10k</button></div><p id="adminOutput"></p></article></section>
-  </main>
-
-  <dialog id="authModal" class="glass"><h3>Login / Signup</h3><input id="username" placeholder="username"/><div class="row-wrap"><button id="signup">Signup</button><button id="login">Login</button><button id="logout">Logout</button><button id="closeAuth">Close</button></div><p id="authStatus"></p></dialog>
-  <script src="app.js"></script>
-</body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>NeonCase - Dashboard</title><link rel="stylesheet" href="styles.css"/></head>
+<body data-page="dashboard"><div id="seasonFx" class="season-fx"></div><div class="app-shell"><aside id="sidebar" class="sidebar glass"><div class="side-head"><h1>NeonCase</h1><button id="toggleSidebar">☰</button></div><div class="wallet glass"><div><small>Balance</small><strong id="money"></strong></div><div><small>Bank</small><strong id="bankMoney"></strong></div><div><small>Rank</small><strong id="rank"></strong></div></div><nav class="side-nav"><a href="index.html" class="active">Dashboard</a>
+<a href="click.html" class="">Click</a>
+<a href="cases.html" class="">Cases</a>
+<a href="casino.html" class="">Casino</a>
+<a href="battles.html" class="">Battles</a>
+<a href="market.html" class="">Market</a>
+<a href="inventory.html" class="">Inventory</a>
+<a href="database.html" class="">Database</a>
+<a href="help.html" class="">Help</a>
+<a href="stats.html" class="">Stats</a></nav><div class="auth-actions"><button id="openAuth">Sign In</button><button id="themeToggle">Theme</button></div></aside><main class="content"><section class="panel glass"><h2>Dashboard</h2><p id="seasonEvent"></p><div class="row-wrap"><button id="claimDaily">Claim Daily Reward</button><button id="dailyWheel">Spin Daily Wheel</button></div><div class="grid two"><article class="panel glass"><h3>Live Feed</h3><div id="liveFeed" class="feed"></div></article><article class="panel glass"><h3>Update Log</h3><div id="updateLog" class="history"></div><p>made by d3vi0us and Mr. GPT</p></article></div></section></main></div>
+<dialog id="authModal" class="glass"><h3>Login</h3><input id="username" placeholder="username"/><div class="row-wrap"><button id="signup">Signup</button><button id="login">Login</button><button id="logout">Logout</button><button id="closeAuth">Close</button></div><p id="authStatus"></p></dialog>
+<dialog id="bidModal" class="glass"><h3>Place Bid</h3><p id="bidItem"></p><input id="bidInput" type="number" min="1" value="5"/><div class="row-wrap"><button id="confirmBid">Confirm Bid</button><button id="cancelBid">Cancel</button></div><div id="bidWheel" class="mini-wheel"></div></dialog>
+<script src="app.js"></script></body></html>
