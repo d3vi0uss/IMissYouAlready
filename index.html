@@ -9,221 +9,84 @@
 <body>
   <div class="bg-glow glow-1"></div>
   <div class="bg-glow glow-2"></div>
-  <div id="snowOverlay" class="snow-overlay hidden"></div>
+  <div id="seasonFx" class="season-fx"></div>
 
   <header class="topbar glass">
     <div class="logo">Neon<span>Case</span></div>
     <nav id="tabs" class="tabs">
-      <button data-tab="dashboard" class="active">Dashboard</button>
-      <button data-tab="clicker">Click</button>
-      <button data-tab="cases">Cases</button>
-      <button data-tab="casino">Casino</button>
-      <button data-tab="battles">Battles</button>
-      <button data-tab="market">Market</button>
-      <button data-tab="missions">Missions</button>
-      <button data-tab="inventory">Inventory</button>
-      <button data-tab="stats">Stats</button>
-      <button data-tab="bank">Bank</button>
+      <button data-tab="dashboard" class="active">Dashboard</button><button data-tab="clicker">Click</button><button data-tab="cases">Cases</button><button data-tab="casino">Casino</button>
+      <button data-tab="battles">Battles</button><button data-tab="market">Market</button><button data-tab="inventory">Inventory</button><button data-tab="database">Database</button><button data-tab="stats">Stats</button>
       <button id="adminTabBtn" data-tab="admin" class="hidden">Admin</button>
     </nav>
-    <div class="auth-actions">
-      <button id="themeToggle">🌓</button>
-      <button id="openAuth">Sign In</button>
-    </div>
+    <div class="auth-actions"><button id="themeToggle">🌓</button><button id="openAuth">Sign In</button></div>
   </header>
 
   <section class="currency-row">
-    <div class="currency-card glass"><small>Balance</small><strong id="money">$0</strong></div>
-    <div class="currency-card glass"><small>Bank</small><strong id="bankMoney">$0</strong></div>
-    <div class="currency-card glass"><small>XP / Level</small><strong id="xpLevel">0 / Lv 1</strong></div>
-    <div class="currency-card glass"><small>Rank</small><strong id="rank">Silver I</strong></div>
-    <div class="currency-card glass"><small>Luck</small><strong id="luck">1.0x</strong></div>
+    <div class="currency-card glass"><small>Balance</small><strong id="money"></strong></div>
+    <div class="currency-card glass"><small>Bank</small><strong id="bankMoney"></strong></div>
+    <div class="currency-card glass"><small>XP/Level</small><strong id="xpLevel"></strong></div>
+    <div class="currency-card glass"><small>Rank</small><strong id="rank"></strong></div>
+    <div class="currency-card glass"><small>Luck</small><strong id="luck"></strong></div>
   </section>
 
   <main>
     <section id="dashboard" class="tab-panel active">
       <div class="grid two">
         <article class="panel glass">
-          <h2>Season Event</h2>
-          <p id="seasonEvent"></p>
-          <div class="row-wrap">
-            <select id="eventPicker">
-              <option>None</option>
-              <option>Christmas</option>
-              <option>Halloween</option>
-              <option>Summer Heat</option>
-            </select>
-            <button id="claimDaily">Claim Daily Reward</button>
-            <button id="rebirthBtn">Rebirth</button>
-          </div>
+          <h2>Season Event</h2><p id="seasonEvent"></p>
+          <div class="row-wrap"><button id="claimDaily">Claim Daily Reward</button><button id="dailyWheel">Spin Daily Wheel</button><button id="rebirthBtn">Rebirth</button></div>
         </article>
-        <article class="panel glass">
-          <h2>Live Feed (Bots)</h2>
-          <div id="liveFeed" class="feed"></div>
-        </article>
+        <article class="panel glass"><h2>Live Feed (Bots)</h2><div id="liveFeed" class="feed"></div></article>
       </div>
-      <div class="panel glass">
-        <h2>Scrollable History</h2>
-        <div id="history" class="history"></div>
-      </div>
-      <div class="panel glass">
-        <h2>Data Backup</h2>
-        <div class="row-wrap">
-          <button id="exportData">Export Save</button>
-          <label class="import-label">Import Save<input id="importData" type="file" accept="application/json" hidden /></label>
-        </div>
-      </div>
+      <div class="panel glass"><h2>History</h2><div id="history" class="history"></div></div>
+      <div class="panel glass"><h2>Data Backup</h2><div class="row-wrap"><button id="exportData">Export Save</button><label class="import-label">Import Save<input id="importData" type="file" accept="application/json" hidden/></label></div></div>
     </section>
 
     <section id="clicker" class="tab-panel">
       <div class="grid two">
         <article class="panel glass center">
-          <h2>Click for Cash</h2>
-          <button id="moneyClick" class="big-btn">+ Cash</button>
-          <p>Per click: <span id="perClick">$1</span></p>
-          <div class="row-wrap">
-            <button data-upg="click" class="upgrade">Upgrade Click</button>
-            <button data-upg="auto" class="upgrade">Auto Click</button>
-            <button data-upg="luck" class="upgrade">Luck Stat</button>
-          </div>
+          <h2>Click for Cash</h2><button id="moneyClick" class="big-btn">+ Cash</button><p>Per click: <span id="perClick"></span></p>
+          <div class="row-wrap"><button data-upg="click" class="upgrade" id="upgClick"></button><button data-upg="auto" class="upgrade" id="upgAuto"></button><button data-upg="luck" class="upgrade" id="upgLuck"></button></div>
         </article>
-        <article class="panel glass">
-          <h2>Rewards & Loyalty</h2>
-          <p>Streak: <span id="streak">0</span></p>
-          <p>Loyalty points: <span id="loyalty">0</span></p>
-          <button id="claimStreak">Claim Streak Bonus</button>
-        </article>
+        <article class="panel glass"><h2>Rewards</h2><p>Streak: <span id="streak"></span></p><p>Loyalty: <span id="loyalty"></span></p><button id="claimStreak">Claim Streak Bonus</button></article>
       </div>
     </section>
 
     <section id="cases" class="tab-panel">
-      <article class="panel glass">
-        <div class="row-between">
-          <h2>CS Cases + Sticker Cases</h2>
-          <div class="row-wrap">
-            <label>Open count</label>
-            <input type="number" id="openCount" min="1" max="10" value="1" />
-          </div>
-        </div>
-        <div id="caseList" class="card-grid"></div>
-      </article>
-      <article class="panel glass">
-        <h2>Case Opening Animation</h2>
-        <div id="caseAnimation" class="roll"></div>
-        <div id="openResults" class="card-grid"></div>
-      </article>
+      <article class="panel glass"><div class="row-between"><h2>Cases Shop</h2><input type="number" id="openCount" min="1" max="10" value="1" /></div><div id="caseList" class="card-grid"></div></article>
+      <article class="panel glass"><h2>Case Opening Animation</h2><div id="caseAnimation" class="roll"></div><div id="openResults" class="card-grid"></div></article>
     </section>
 
     <section id="casino" class="tab-panel">
       <article class="panel glass">
-        <h2>Casino Games</h2>
-        <div class="row-wrap">
-          <select id="gameSelect">
-            <option>Blackjack</option><option>Roulette</option><option>Coinflip</option><option>Crash</option><option>Jackpot</option><option>Mines</option><option>Slots</option><option>Plinko</option>
-          </select>
-          <input id="betAmount" type="number" min="1" value="50" />
-          <input id="betSlider" type="range" min="1" max="1000" value="50" />
-          <button id="playGame">Play</button>
-          <button id="autoBet">Auto x5</button>
-          <button id="crashCashout" disabled>Cashout Crash</button>
-        </div>
-        <div class="casino-graphics">
-          <div class="card">A♠</div><div class="card">10♥</div><div class="wheel">🎡</div><div id="crashMeter">1.00x</div>
-        </div>
+        <h2>Casino</h2>
+        <div class="row-wrap"><select id="gameSelect"><option>Blackjack</option><option>Roulette</option><option>Coinflip</option><option>Crash</option><option>Jackpot</option><option>Mines</option><option>Slots</option><option>Plinko</option></select><input id="betAmount" type="number" min="1" value="50"/><button id="playGame">Play</button></div>
+        <div id="casinoUI" class="casino-ui"></div>
         <p id="casinoOutput"></p>
       </article>
     </section>
 
     <section id="battles" class="tab-panel">
-      <article class="panel glass">
-        <h2>Case Battles (1v1 / Team / FFA)</h2>
-        <div class="row-wrap">
-          <select id="battleMode"><option>1v1</option><option>Team</option><option>FFA</option></select>
-          <input id="battleBet" type="number" min="10" value="100" />
-          <button id="startBattle">Start Battle</button>
-        </div>
-        <div id="battleAnimation" class="roll"></div>
-        <p id="battleOutput"></p>
-      </article>
+      <article class="panel glass"><h2>Case Battles</h2><div class="row-wrap"><select id="battleMode"><option>1v1</option><option>Team</option><option>FFA</option></select><select id="battleCase"></select><input id="battleBet" type="number" min="10" value="100"/><button id="startBattle">Start Battle</button></div><div id="battleAnimation" class="roll"></div><p id="battleOutput"></p></article>
     </section>
 
     <section id="market" class="tab-panel">
-      <article class="panel glass">
-        <h2>Advanced Marketplace</h2>
-        <div class="row-wrap">
-          <button id="listItem">List Random Item</button>
-          <button id="runAuction">Run Auction</button>
-          <button id="tradeOffer">Send Trade Offer</button>
-        </div>
-        <canvas id="marketGraph" width="800" height="220"></canvas>
-        <div id="marketLog" class="feed"></div>
-      </article>
-    </section>
-
-    <section id="missions" class="tab-panel">
-      <article class="panel glass">
-        <h2>Daily / Weekly Missions & Battle Pass</h2>
-        <div id="missionList"></div>
-        <p>Battle Pass XP: <span id="bpXP">0</span></p>
-      </article>
+      <article class="panel glass"><h2>Marketplace + Auction</h2><canvas id="marketGraph" width="900" height="220"></canvas><div id="marketListings" class="card-grid"></div><div id="marketLog" class="feed"></div></article>
     </section>
 
     <section id="inventory" class="tab-panel">
-      <article class="panel glass">
-        <h2>Inventory + Collection</h2>
-        <div class="row-wrap">
-          <select id="rarityFilter"><option value="all">All Rarities</option><option>Consumer</option><option>Industrial</option><option>Mil-Spec</option><option>Restricted</option><option>Classified</option><option>Covert</option><option>Knife</option></select>
-          <input id="searchSkin" placeholder="Search skin / weapon" />
-          <button id="sortValue">Sort by value</button>
-        </div>
-        <div id="inventoryGrid" class="card-grid"></div>
-      </article>
+      <article class="panel glass"><h2>Inventory</h2><div class="row-wrap"><select id="rarityFilter"><option value="all">All</option><option>Consumer</option><option>Industrial</option><option>Mil-Spec</option><option>Restricted</option><option>Classified</option><option>Covert</option><option>Knife</option></select><input id="searchSkin" placeholder="Search"/><button id="sortValue">Sort by Value</button></div><div id="inventoryGrid" class="card-grid"></div></article>
     </section>
 
-    <section id="stats" class="tab-panel">
-      <article class="panel glass">
-        <h2>Lifetime Stats</h2>
-        <ul id="statsList"></ul>
-      </article>
+    <section id="database" class="tab-panel">
+      <article class="panel glass"><h2>Skins Database (All possible)</h2><div id="databaseGrid" class="card-grid"></div></article>
     </section>
 
-    <section id="bank" class="tab-panel">
-      <article class="panel glass">
-        <h2>Bank / Deposit / Interest / Loan</h2>
-        <div class="row-wrap">
-          <input id="bankAmount" type="number" value="100" min="1" />
-          <button id="depositBtn">Deposit</button>
-          <button id="withdrawBtn">Withdraw</button>
-          <button id="loanBtn">Take Loan</button>
-        </div>
-      </article>
-    </section>
-
-    <section id="admin" class="tab-panel hidden">
-      <article class="panel glass">
-        <h2>Admin Panel</h2>
-        <div class="row-wrap">
-          <button id="spawnItem">Spawn Item</button>
-          <button id="boostEconomy">Economy +10%</button>
-          <button id="grantCash">Grant $10k</button>
-        </div>
-        <p id="adminOutput"></p>
-      </article>
-    </section>
+    <section id="stats" class="tab-panel"><article class="panel glass"><h2>Stats</h2><ul id="statsList"></ul></article></section>
+    <section id="admin" class="tab-panel hidden"><article class="panel glass"><h2>Admin Panel</h2><div class="row-wrap"><button id="spawnItem">Spawn Item</button><button id="boostEconomy">Economy +10%</button><button id="grantCash">Grant $10k</button></div><p id="adminOutput"></p></article></section>
   </main>
 
-  <dialog id="authModal" class="glass">
-    <h3>Login / Signup</h3>
-    <input id="username" placeholder="username" />
-    <input id="avatar" placeholder="avatar emoji" value="😎" />
-    <div class="row-wrap">
-      <button id="signup">Signup</button>
-      <button id="login">Login</button>
-      <button id="logout">Logout</button>
-      <button id="closeAuth">Close</button>
-    </div>
-    <p id="authStatus"></p>
-  </dialog>
+  <dialog id="authModal" class="glass"><h3>Login / Signup</h3><input id="username" placeholder="username"/><input id="avatar" placeholder="avatar" value="😎"/><div class="row-wrap"><button id="signup">Signup</button><button id="login">Login</button><button id="logout">Logout</button><button id="closeAuth">Close</button></div><p id="authStatus"></p></dialog>
 
   <script src="app.js"></script>
 </body>
