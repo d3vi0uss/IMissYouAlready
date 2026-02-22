@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>NeonCase - Inventory</title><link rel="stylesheet" href="styles.css"/></head>
+<body data-page="inventory"><div id="seasonFx" class="season-fx"></div><div class="app-shell"><aside id="sidebar" class="sidebar glass"><div class="side-head"><h1>NeonCase</h1><button id="toggleSidebar">☰</button></div><div class="wallet glass"><div><small>Balance</small><strong id="money"></strong></div><div><small>Bank</small><strong id="bankMoney"></strong></div><div><small>Rank</small><strong id="rank"></strong></div></div><nav class="side-nav"><a href="index.html" class="">Dashboard</a>
+<a href="click.html" class="">Click</a>
+<a href="cases.html" class="">Cases</a>
+<a href="casino.html" class="">Casino</a>
+<a href="battles.html" class="">Battles</a>
+<a href="market.html" class="">Market</a>
+<a href="inventory.html" class="active">Inventory</a>
+<a href="database.html" class="">Database</a>
+<a href="help.html" class="">Help</a>
+<a href="stats.html" class="">Stats</a></nav><div class="auth-actions"><button id="openAuth">Sign In</button><button id="themeToggle">Theme</button></div></aside><main class="content"><section class="panel glass"><h2>Inventory</h2><div class="row-wrap"><select id="rarityFilter"><option value="all">All</option><option>Mil-Spec</option><option>Restricted</option><option>Classified</option><option>Covert</option><option>Knife</option></select><input id="searchSkin" placeholder="Search"/><button id="sortValue">Sort by Value</button><button id="autoSell">Auto-sell non-favorites</button></div><div id="inventoryGrid" class="card-grid three"></div></section></main></div>
+<dialog id="authModal" class="glass"><h3>Login</h3><input id="username" placeholder="username"/><div class="row-wrap"><button id="signup">Signup</button><button id="login">Login</button><button id="logout">Logout</button><button id="closeAuth">Close</button></div><p id="authStatus"></p></dialog>
+<dialog id="bidModal" class="glass"><h3>Place Bid</h3><p id="bidItem"></p><input id="bidInput" type="number" min="1" value="5"/><div class="row-wrap"><button id="confirmBid">Confirm Bid</button><button id="cancelBid">Cancel</button></div><div id="bidWheel" class="mini-wheel"></div></dialog>
+<script src="app.js"></script></body></html>
