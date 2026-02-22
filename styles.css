@@ -1,35 +1,40 @@
 :root {
-  --bg: #11131c;
-  --panel: #1a1d2a;
-  --text: #eef1ff;
-  --muted: #96a1c7;
-  --accent: #7b5cff;
-  --accent2: #31d8ff;
+  --bg: #09070f;
+  --bg2: #130d23;
+  --panel: #151124;
+  --text: #f2eeff;
+  --muted: #9f95c8;
+  --accent: #914dff;
+  --accent2: #c35dff;
+  --danger: #ff4e70;
 }
-:root.light { --bg:#eceef9; --panel:#fff; --text:#101422; --muted:#5e6580; }
+:root.light { --bg:#eceef9; --bg2:#f6f2ff; --panel:#fff; --text:#111425; --muted:#5e6580; }
 * { box-sizing: border-box; }
 body {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
   color: var(--text);
-  background: radial-gradient(circle at 30% 0%, #241c46, var(--bg) 35%), var(--bg);
+  background: radial-gradient(circle at 30% 0%, #28104e, var(--bg) 35%), var(--bg2);
   min-height: 100vh;
 }
-.bg-glow { position: fixed; width: 280px; height: 280px; border-radius: 50%; filter: blur(60px); z-index: -1; opacity: .45; }
-.glow-1 { background: #7b5cff; top: -60px; right: 10%; }
-.glow-2 { background: #31d8ff; bottom: 0; left: 5%; }
+.hidden{display:none!important}
+.bg-glow { position: fixed; width: 320px; height: 320px; border-radius: 50%; filter: blur(70px); z-index: -2; opacity: .45; }
+.glow-1 { background: #7a2cff; top: -100px; right: 10%; }
+.glow-2 { background: #4a1a78; bottom: -80px; left: 5%; }
+.snow-overlay{position:fixed;inset:0;pointer-events:none;z-index:5;background-image:radial-gradient(circle,#fff 1px,transparent 2px);background-size:40px 40px;animation:snow 10s linear infinite;opacity:.5}
+@keyframes snow{from{background-position:0 0}to{background-position:0 500px}}
 .topbar { display: flex; gap: 12px; align-items: center; justify-content: space-between; margin: 16px; padding: 12px; }
 .logo { font-weight: 900; } .logo span { color: var(--accent2); }
 .tabs { display: flex; flex-wrap: wrap; gap: 6px; }
-.tabs button, .auth-actions button, button, select, input {
-  background: #21253b;
+.tabs button, .auth-actions button, button, select, input, .import-label {
+  background: #231739;
   color: var(--text);
-  border: 1px solid #2e3453;
+  border: 1px solid #4a2f72;
   border-radius: 10px;
   padding: 8px 10px;
 }
-.tabs button.active { background: linear-gradient(90deg, var(--accent), #5ec2ff); }
-.glass { background: linear-gradient(180deg, rgba(26,29,42,.95), rgba(22,25,36,.8)); backdrop-filter: blur(8px); border: 1px solid #2d3452; border-radius: 14px; }
+.tabs button.active { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+.glass { background: linear-gradient(180deg, rgba(21,17,36,.95), rgba(14,10,26,.8)); backdrop-filter: blur(8px); border: 1px solid #4b2f6f; border-radius: 14px; }
 .currency-row { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 10px; padding: 0 16px; }
 .currency-card { padding: 10px; }
 .currency-card small { color: var(--muted); display: block; }
@@ -39,18 +44,28 @@ main { padding: 16px; }
 .grid.two { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 12px; }
 .panel { padding: 14px; margin-bottom: 12px; }
 .center { text-align: center; }
-.big-btn { width: 220px; height: 220px; border-radius: 50%; font-size: 1.2rem; background: radial-gradient(circle, #2fe3ff, #7b5cff); }
-.card-grid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill,minmax(140px,1fr)); }
-.skin-card { padding: 10px; border-radius: 12px; border: 1px solid #414866; background: #202537; }
+.big-btn { width: 220px; height: 220px; border-radius: 50%; font-size: 1.2rem; background: radial-gradient(circle, #cf73ff, #631cf7); }
+.card-grid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill,minmax(180px,1fr)); }
+.skin-card { padding: 10px; border-radius: 12px; border: 1px solid #61408d; background: #1b1330; }
+.weapon-thumb{height:80px;border-radius:10px;background:linear-gradient(135deg,#2f1d52,#160f25);display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:6px;border:1px solid #553880}
+.case-thumb{height:70px;border-radius:10px;background:linear-gradient(135deg,#251640,#3b236a);display:flex;align-items:center;justify-content:center;font-size:34px;margin-bottom:6px}
+.stickers{display:flex;gap:4px}
 .row-wrap { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .row-between { display:flex; justify-content: space-between; align-items: center; gap: 8px; }
-.feed, .history { max-height: 180px; overflow: auto; display: grid; gap: 4px; font-size: .9rem; }
-.roll { min-height: 50px; padding: 6px; border: 1px dashed #49537f; border-radius: 12px; margin-bottom: 10px; }
+.feed, .history { max-height: 220px; overflow: auto; display: grid; gap: 4px; font-size: .9rem; }
+.roll { min-height: 58px; padding: 6px; border: 1px dashed #7451a6; border-radius: 12px; margin-bottom: 10px; overflow:hidden }
+.roll-track{display:flex;gap:8px;animation:roll 1s linear}
+@keyframes roll{from{transform:translateX(200px)}to{transform:translateX(-30px)}}
+.casino-graphics{display:flex;gap:8px;align-items:center;margin-top:8px}
+.card{width:50px;height:72px;background:#fff;color:#111;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.wheel{font-size:34px}
+#crashMeter{padding:8px 14px;background:#2c1e46;border:1px solid #6c44ad;border-radius:10px;font-weight:700}
 .rarity-Consumer{box-shadow: inset 0 0 0 1px #b8b8b8}.rarity-Industrial{box-shadow: inset 0 0 0 1px #6aa0ff}
 .rarity-Mil-Spec{box-shadow: inset 0 0 0 1px #4d6eff}.rarity-Restricted{box-shadow: inset 0 0 0 1px #8f58ff}
 .rarity-Classified{box-shadow: inset 0 0 0 1px #d13dff}.rarity-Covert{box-shadow: inset 0 0 0 1px #ff4d5f}
 .rarity-Knife{box-shadow: inset 0 0 0 2px #ffcf4a; animation: gold 1.2s infinite alternate;}
+.event-border{border:1px solid transparent;background:linear-gradient(#1b1330,#1b1330) padding-box,linear-gradient(90deg,#ff4ad8,#6dd6ff,#ffd95f) border-box}
 @keyframes gold { from { filter: brightness(1); } to { filter: brightness(1.24); } }
-canvas { width: 100%; background:#171a28; border-radius: 10px; border:1px solid #2f3450; margin-top:10px }
+canvas { width: 100%; background:#140f23; border-radius: 10px; border:1px solid #4f397a; margin-top:10px }
 dialog { border: none; color: var(--text); padding: 12px; }
 @media (max-width: 768px) { .tabs { max-height: 88px; overflow:auto; } .big-btn { width: 180px; height: 180px; } }
